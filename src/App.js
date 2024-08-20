@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./components/Navbar";
+import ProductList from "./components/ProductList";
+import React, { useState } from "react";
 
 function App() {
+  const initialProductList = [
+    {
+      price: 9999,
+      name: "IPhone 10s Max",
+      quantity: 0,
+    },
+    {
+      price: 999,
+      name: "Readmi 10s Max",
+      quantity: 0,
+    },
+  ];
+
+  const [productList, setProductList] = useState(initialProductList);
+
+  const incrementQuantity = (index) => {
+    let newProductList = [...productList];
+    newProductList[index].quantity++;
+    setProductList(newProductList);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <main className="container mt-5">
+        <ProductList
+          productList={productList}
+          incrementQuantity={incrementQuantity}
+        />
+      </main>
+      {/* <Footer /> */}
+    </>
   );
 }
 
